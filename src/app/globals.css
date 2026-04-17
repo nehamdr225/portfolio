@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* Without "inline", Tailwind emits CSS variables to :root and utilities
+   reference them via var() — required for runtime theming to work. */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-card: #141414;
+  --color-bg-card-hover: #1c1c1c;
+  --color-border: #2a2a2a;
+  --color-text: #f0f0f0;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #6b6b75;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ── Light theme ────────────────────────────────────────────────── */
+html.light {
+  color-scheme: light;
+  --color-bg: #ffffff;
+  --color-bg-card: #f3f4f6;
+  --color-bg-card-hover: #e9eaec;
+  --color-border: #d1d5db;
+  --color-text: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+}
+
+/* ── Dark theme (explicit, matches default) ─────────────────────── */
+html.dark, html:not(.light):not(.hacker) {
+  color-scheme: dark;
+}
+
+/* ── Hacker theme ───────────────────────────────────────────────── */
+html.hacker {
+  color-scheme: dark;
+  --color-bg: #000d01;
+  --color-bg-card: #031603;
+  --color-bg-card-hover: #071e07;
+  --color-border: #0a3a0a;
+  --color-text: #00e676;
+  --color-text-secondary: #4caf50;
+  --color-text-muted: #1b5e20;
+  --color-accent: #00c853;
+  --color-accent-hover: #00e676;
+  --font-sans: var(--font-hacker), "Courier New", monospace;
+}
+
+/* Green spotlight in hacker mode */
+html.hacker body::before {
+  background: radial-gradient(
+    var(--spotlight-size) circle at var(--spotlight-x, -9999px) var(--spotlight-y, -9999px),
+    rgba(0, 200, 83, 0.10),
+    transparent 70%
+  );
+}
+
+/* CRT scanline overlay in hacker mode */
+html.hacker body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 255, 65, 0.018) 3px,
+    rgba(0, 255, 65, 0.018) 4px
+  );
+}
+
+/* ── Smooth theme transition ────────────────────────────────────── */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    fill 0.25s ease !important;
+}
+
+@property --spotlight-size {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    var(--spotlight-size) circle at var(--spotlight-x, -9999px) var(--spotlight-y, -9999px),
+    rgba(99, 102, 241, 0.12),
+    transparent 70%
+  );
+  transition: --spotlight-size 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Native form inputs pick up theme colors */
+input, textarea, select {
+  background-color: var(--color-bg-card);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
