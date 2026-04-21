@@ -92,7 +92,7 @@ export default function Skills() {
                 delay: 0.1 * i,
                 ease: "easeOut",
               }}
-              className="group p-6 rounded-xl bg-bg-card border border-border hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300"
+              className="group p-6 rounded-xl bg-bg-card hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300"
             >
               <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                 {skill.icon}

@@ -107,9 +107,7 @@ export default function Hero() {
               Manandhar
             </h1>
             <p className="text-text-secondary text-base sm:text-lg md:text-xl leading-relaxed max-w-lg mb-6 md:mb-8">
-              I craft intuitive digital experiences at the intersection of UX
-              design and cybersecurity — making products that are both
-              delightful and secure.
+              I craft intuitive digital experiences at the intersection of UX design and cybersecurity, making products that are both delightful and secure.
             </p>
             <div className="flex flex-wrap gap-3 md:gap-4">
               <a
