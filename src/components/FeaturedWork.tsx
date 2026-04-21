@@ -24,6 +24,121 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Aqore Mobile App",
+    description:
+      "Product design for Aqore's first mobile app — a comprehensive staffing solution for employees, office staff, and customers to manage work, timesheets, and hiring on the go.",
+    track: "design",
+    tags: ["Mobile Design", "Product Design", "Multi-User UX", "Enterprise App"],
+    images: [
+      "/images/aqore-mobile/1.png",
+      "/images/aqore-mobile/2.png",
+      "/images/aqore-mobile/3.png",
+      "/images/aqore-mobile/4.png",
+      "/images/aqore-mobile/5.png",
+      "/images/aqore-mobile/6.png",
+      "/images/aqore-mobile/7.png",
+      "/images/aqore-mobile/8.png",
+      "/images/aqore-mobile/9.png",
+    ],
+    caseStudy: {
+      client:
+        "Aqore is a staffing and recruiting platform used by agencies to manage workers, clients, and jobs. The web product already existed, but there was no mobile experience for employees in the field, office staff on the go, or customers checking talent and timesheets.",
+      goal: {
+        intro: "Design a net-new mobile app that works for three groups at once:",
+        bullets: [
+          "Employees / contractors – see assignments, locations, tasks, and pay",
+          "Office staff / recruiters – manage candidates, timesheets, notes, and tasks",
+          "Customers / HR contacts – view workers, contact details, and basic analytics",
+        ],
+      },
+      role: "Product Design Lead – Defined the mobile IA, flows, and interaction patterns from the ground up. Led a small team of designers and worked closely with developers through delivery. Pitched the vision and design proposals directly to the CEO and leadership, getting buy-in on scope, priorities, and rollout. Built a reusable mobile design system aligned with the existing web brand.",
+      solution: {
+        intro: undefined,
+        bullets: [
+          "Role-based home: focused employee home showing tasks, timesheet approvals, upcoming jobs, and invoices; map-based assignment details with pay and schedule.",
+          "Customer & contact views: snapshot screens with key contact info, comments, and HR people, optimized for quick actions (call, email) on the go.",
+          "Candidate & notes: \"Interested / Not interested\" decisions with a chat-like notes history so recruiters can collaborate around each candidate.",
+          "Timesheet & bulk actions: simple day-chips pattern to apply time changes across multiple workers and days in a few taps.",
+          "Tasks & metrics: internal task lists by stage (New Hire, Paperwork, Review, Orientation) and a compact dashboard with weekly hiring trends.",
+        ],
+      },
+      impact:
+        "The mobile app turned Aqore from a desk-only system into a full staffing workflow on mobile: Workers know where to be, when to work, and what they're being paid. Recruiters can review, message, and update timesheets away from their desks. Customers get lightweight visibility into people and performance, improving transparency.",
+    },
+  },
+  {
+    title: "Aqore – Staffing & Recruiting Employee Dashboard + Messaging Suite",
+    description:
+      "UX/UI design across Aqore's staffing platform — employee dashboard, SMS/email messaging, and campaign management — built for high data density and recruiter efficiency.",
+    track: "design",
+    tags: ["Dashboard", "Enterprise UX", "Messaging", "UI Design"],
+    images: [
+      "/images/aqore/Picture11.png",
+      "/images/aqore/Picture14.png",
+      "/images/aqore/Picture15.png",
+      "/images/aqore/Picture12.png",
+      "/images/aqore/Picture13.png",
+    ],
+    caseStudy: {
+      client:
+        "Aqore Software – a staffing and recruiting platform used by agencies to manage jobs, employees, and communications.",
+      goal: {
+        intro: "Modernize key parts of the product to:",
+        bullets: [
+          "Give new recruits/employees a clear view of their jobs, payments, and documents",
+          "Help recruiters send SMS, email, and bulk campaigns efficiently",
+          "Keep everything consistent with Aqore's design language and high data density needs",
+        ],
+      },
+      role: "UX/UI Designer over 2 years – worked on employee dashboard, messaging flows, campaign creation, and visual refinements across the product.",
+      solution: {
+        intro: undefined,
+        bullets: [
+          "Employee Dashboard (new recruits): Single view of total assignments, hours, and pay; next scheduled jobs with shift countdowns; quick access to remaining onboarding tasks, recently viewed documents, and payment history; \"Explore jobs around you\" section to surface relevant new opportunities.",
+          "SMS & Email Messaging: Inbox-style Text view with conversation history, call logs, audio notes, and templates; clear separation between \"Assigned to you,\" scheduled, and closed texts so recruiters always know what needs attention; message composer optimized for frequent, short updates with attachments and templates.",
+          "Campaign Creation & Management: Guided Create Campaign flow (choose template → select phone profile → add internal notes → preview message); flexible recipient selection (search, checkboxes, bulk upload via CSV/Excel) for large lists; campaign dashboard with status, recipients, delivery, reply, and failure rates to quickly see performance; scheduling options so teams can set up campaigns in advance.",
+        ],
+      },
+      impact:
+        "These designs made Aqore's staffing platform more actionable and user-friendly for both sides: employees get transparency on their work and pay, while recruiters gain a streamlined workspace for high-volume texting and campaigns—all within a consistent, clean interface.",
+    },
+  },
+  {
+    title: "Aqore – Job Schedule Manager (JSM)",
+    description:
+      "Product/UX design for a new scheduling tool inside Aqore's staffing platform — transforming complex shift planning from spreadsheets to a visual, unified planner for agencies.",
+    track: "design",
+    tags: ["Product Design", "Scheduling", "Enterprise UX", "Workflow Design"],
+    images: [
+      "/images/jsm/1.png",
+      "/images/jsm/2.png",
+      "/images/jsm/3.png"
+    ],
+    caseStudy: {
+      client:
+        "Aqore Software – a staffing and recruiting platform used by agencies to manage large, mixed workforces (hourly, temp, full-time). They needed a way to plan and manage complex shift schedules directly inside the product instead of relying on spreadsheets.",
+      goal: {
+        intro: "Create a new Job Schedule Manager (JSM) that lets schedulers:",
+        bullets: [
+          "Plan shifts across multiple clients, roles, and locations",
+          "See open vs filled shifts at a glance",
+          "Quickly create, copy, and adjust schedules for any level of worker",
+        ],
+      },
+      role: "Product/UX Design Lead – Took the JSM from zero to full concept, including workflows, IA, and interaction model. Pitched the vision and proposed solutions directly to the CEO and leadership, aligning on problems, scope, and success metrics. Designed the full experience (list/grid views, filters, job creation wizard) and collaborated with devs through implementation.",
+      solution: {
+        intro: undefined,
+        bullets: [
+          "Schedule Overview: Calendar-like view grouped by customer and job role (e.g., \"Coca Cola – Quality Assurance\"). Color-coded shift cards (day, swing, overnight) showing time, headcount, and open/filled status. Left-side filters (customer, department, job title, address, status, office) so schedulers can instantly narrow thousands of shifts.",
+          "New Job & Shift Creation (3-Step Flow): 1) Create New Job: select customer, department, worksite, job title, pay/bill rates, skills, and base shifts. 2) Manage Schedules: pick PPE period, days, and shifts, then apply them across the week in one action instead of editing each day. 3) Assign: allocate workers into remaining slots (open vs filled clearly indicated).",
+          "Designed for a wide demographic: The UI uses clear typography, spacing, and simple controls so both front-line coordinators and senior managers can understand the schedule at a glance.",
+        ],
+      },
+      impact:
+        "JSM turned a spreadsheet-heavy, error-prone process into a visual planner inside Aqore: Schedulers can see capacity and gaps instantly and fill shifts faster. Agencies manage thousands of shifts across brands and locations in one unified tool. This project is one of my favourite pieces of work: I owned the concept, sold it to the CEO, and designed the end-to-end experience that now supports scheduling for a very broad workforce.",
+    },
+  },
+  {
     title: "Delight Solutions",
     description:
       "End-to-end UX/UI design for a Nepal-based digital agency — covering services, careers, and client lead generation across a cohesive multi-page website.",
@@ -103,43 +218,6 @@ const projects: Project[] = [
       },
       impact:
         "KAHA gives people and businesses in Nepal a reliable digital address, reducing back-and-forth calls for directions and supporting smoother deliveries, visits, and local discovery—essentially becoming an everyday \"where exactly is this?\" tool for Nepali users.",
-    },
-  },
-  {
-    title: "Aqore",
-    description:
-      "UX/UI design across Aqore's staffing platform — employee dashboard, SMS/email messaging, and campaign management — built for high data density and recruiter efficiency.",
-    track: "design",
-    tags: ["Dashboard", "Enterprise UX", "Messaging", "UI Design"],
-    images: [
-      "/images/aqore/Picture11.png",
-      "/images/aqore/Picture14.png",
-      "/images/aqore/Picture15.png",
-      "/images/aqore/Picture12.png",
-      "/images/aqore/Picture13.png",
-    ],
-    caseStudy: {
-      client:
-        "Aqore Software – a staffing and recruiting platform used by agencies to manage jobs, employees, and communications.",
-      goal: {
-        intro: "Modernize key parts of the product to:",
-        bullets: [
-          "Give new recruits/employees a clear view of their jobs, payments, and documents",
-          "Help recruiters send SMS, email, and bulk campaigns efficiently",
-          "Keep everything consistent with Aqore's design language and high data density needs",
-        ],
-      },
-      role: "UX/UI Designer over 2 years – worked on employee dashboard, messaging flows, campaign creation, and visual refinements across the product.",
-      solution: {
-        intro: undefined,
-        bullets: [
-          "Employee Dashboard (new recruits): Single view of total assignments, hours, and pay; next scheduled jobs with shift countdowns; quick access to remaining onboarding tasks, recently viewed documents, and payment history; \"Explore jobs around you\" section to surface relevant new opportunities.",
-          "SMS & Email Messaging: Inbox-style Text view with conversation history, call logs, audio notes, and templates; clear separation between \"Assigned to you,\" scheduled, and closed texts so recruiters always know what needs attention; message composer optimized for frequent, short updates with attachments and templates.",
-          "Campaign Creation & Management: Guided Create Campaign flow (choose template → select phone profile → add internal notes → preview message); flexible recipient selection (search, checkboxes, bulk upload via CSV/Excel) for large lists; campaign dashboard with status, recipients, delivery, reply, and failure rates to quickly see performance; scheduling options so teams can set up campaigns in advance.",
-        ],
-      },
-      impact:
-        "These designs made Aqore's staffing platform more actionable and user-friendly for both sides: employees get transparency on their work and pay, while recruiters gain a streamlined workspace for high-volume texting and campaigns—all within a consistent, clean interface.",
     },
   },
   {
@@ -366,10 +444,10 @@ function ProjectDialog({
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    
+
     // Stop Lenis and disable its wheel events
     window.dispatchEvent(new Event("lenis:stop"));
-    
+
     // Disable Lenis wheel events on the document
     const preventLenisWheel = (e: WheelEvent) => {
       const target = e.target as Element;
@@ -377,9 +455,9 @@ function ProjectDialog({
         e.stopImmediatePropagation();
       }
     };
-    
+
     document.addEventListener('wheel', preventLenisWheel, { capture: true, passive: false });
-    
+
     return () => {
       document.body.style.overflow = originalOverflow;
       document.removeEventListener('wheel', preventLenisWheel, { capture: true });
@@ -486,11 +564,10 @@ function ProjectDialog({
                     key={idx}
                     onClick={() => setImgIndex(idx)}
                     aria-label={`View image ${idx + 1}`}
-                    className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                      idx === imgIndex
+                    className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${idx === imgIndex
                         ? "border-accent opacity-100"
                         : "border-transparent opacity-50 hover:opacity-80"
-                    }`}
+                      }`}
                   >
                     <img
                       src={src}
@@ -504,9 +581,9 @@ function ProjectDialog({
           </div>
 
           {/* Bottom/Right - case study content */}
-          <div 
+          <div
             className="flex-1 overflow-y-auto overscroll-contain"
-            style={{ 
+            style={{
               overflowY: 'scroll',
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
@@ -520,9 +597,8 @@ function ProjectDialog({
               {/* Track badge */}
               <div className="flex items-center gap-2 mb-4">
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    project.track === "design" ? "bg-accent" : "bg-emerald-500"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${project.track === "design" ? "bg-accent" : "bg-emerald-500"
+                    }`}
                 />
                 <span className="text-xs text-text-muted uppercase tracking-wider">
                   {project.track}
@@ -539,7 +615,7 @@ function ProjectDialog({
                     className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-[#0077B5] text-white rounded-lg hover:bg-[#005885] transition-colors duration-200"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                     Read LinkedIn Article
                   </a>
@@ -556,7 +632,7 @@ function ProjectDialog({
                     className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors duration-200"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                     View Live Platform
                   </a>
@@ -573,8 +649,8 @@ function ProjectDialog({
                     className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors duration-200"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     Explore Live App
                   </a>
@@ -656,11 +732,10 @@ export default function FeaturedWork() {
               <button
                 key={t.value}
                 onClick={() => setActiveTrack(t.value)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  activeTrack === t.value
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeTrack === t.value
                     ? "bg-accent text-white"
                     : "bg-bg-card border border-border text-text-secondary hover:text-text hover:border-accent/30"
-                }`}
+                  }`}
               >
                 {t.label}
               </button>
@@ -677,26 +752,25 @@ export default function FeaturedWork() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.05 * i, ease: "easeOut" }}
               onClick={() => setSelected(project)}
-              className="group rounded-xl cursor-pointer bg-bg-card border border-border overflow-hidden hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300 text-left w-full relative"
+              className="group rounded-xl flex flex-col cursor-pointer bg-bg-card border border-border overflow-hidden hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300 text-left w-full relative"
             >
-              <div className="p-5">
+              <div className="p-5 flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <span
-                    className={`w-2 h-2 rounded-full ${
-                      project.track === "design"
+                    className={`w-2 h-2 rounded-full ${project.track === "design"
                         ? "bg-accent"
                         : "bg-emerald-500"
-                    }`}
+                      }`}
                   />
                   <span className="text-xs text-text-muted uppercase tracking-wider">
                     {project.track}
                   </span>
                 </div>
-                
+
                 {/* Absolutely positioned arrow */}
-                <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-200">
+                <div className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-200">
                   <svg className="w-4 h-4 text-text-muted group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">
