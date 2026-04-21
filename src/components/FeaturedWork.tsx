@@ -71,7 +71,14 @@ const projects: Project[] = [
       "Product/UX–UI design for a Nepali smart location-sharing app — helping people, businesses, and homes create and share precise digital addresses across Nepal.",
     track: "design",
     tags: ["Mobile Design", "Product Design", "UX/UI", "Maps"],
-    images: ["https://via.placeholder.com/600x400"],
+    images: [
+      "/images/kaha/1.webp",
+      "/images/kaha/2.webp",
+      "/images/kaha/3.webp",
+      "/images/kaha/4.webp",
+      "/images/kaha/5.webp",
+      "/images/kaha/6.webp",
+    ],
     caseStudy: {
       client:
         "KAHA, a Nepali smart location-sharing and community app by Masovison Technology Pvt. Ltd., built to fix Nepal's unclear address and \"where exactly is this?\" problem.",
@@ -215,7 +222,12 @@ const projects: Project[] = [
       "End-to-end Red vs Blue enterprise security simulation — moving across reconnaissance, exploitation, SIEM monitoring, post-exploitation investigation, and technical write-up.",
     track: "security",
     tags: ["Red Team", "Blue Team", "Wazuh", "SIEM", "Pen Testing", "OSINT"],
-    images: ["https://via.placeholder.com/600x400"],
+    images: [
+      "/images/capstone/1.png",
+      "/images/capstone/2.png",
+      "/images/capstone/3.png",
+      "/images/capstone/4.png",
+    ],
     caseStudy: {
       client:
         "For my cybersecurity capstone, I worked through a full-spectrum Red vs Blue security simulation in a prebuilt enterprise-style lab environment. Rather than focusing on only one role, I moved across the entire workflow: understanding the network, validating defensive visibility, performing offensive reconnaissance and exploitation, investigating post-compromise opportunities, and documenting the full attack path from both attacker and defender perspectives.\n\nThe capstone took place in a Proxmox-hosted lab that simulated a small enterprise network. The instructor provided the core infrastructure, which included a VyOS router facing a simulated external network, a pfSense firewall protecting the internal segment, an Ubuntu server running Wazuh, and a Windows 10 endpoint used for host monitoring and security testing.",
@@ -350,12 +362,27 @@ function ProjectDialog({
   const [imgIndex, setImgIndex] = useState(0);
   const total = project.images.length;
 
-  // Pause Lenis while panel is open
+  // Pause Lenis while dialog is open
   useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    
+    // Stop Lenis and disable its wheel events
     window.dispatchEvent(new Event("lenis:stop"));
+    
+    // Disable Lenis wheel events on the document
+    const preventLenisWheel = (e: WheelEvent) => {
+      const target = e.target as Element;
+      if (target?.closest('[data-lenis-prevent]') || target?.closest('[data-dialog-content]')) {
+        e.stopImmediatePropagation();
+      }
+    };
+    
+    document.addEventListener('wheel', preventLenisWheel, { capture: true, passive: false });
+    
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
+      document.removeEventListener('wheel', preventLenisWheel, { capture: true });
       window.dispatchEvent(new Event("lenis:start"));
     };
   }, []);
@@ -384,16 +411,17 @@ function ProjectDialog({
         aria-hidden="true"
       />
 
-      {/* Side panel — slides in from the right, wider */}
+      {/* Centered dialog */}
       <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
         transition={{ type: "spring", damping: 28, stiffness: 260 }}
-        className="fixed right-0 top-0 h-screen w-[80vw] bg-bg z-50 shadow-2xl flex flex-col md:flex-row overflow-hidden"
+        className="fixed inset-0 lg:inset-4 bg-bg z-50 lg:rounded-2xl shadow-2xl flex flex-col overflow-hidden lg:w-[70vw] lg:max-h-[90vh] lg:mx-auto lg:my-auto"
         role="dialog"
         aria-label={project.title}
         aria-modal="true"
+        data-dialog-content
       >
         {/* Close button */}
         <button
@@ -407,110 +435,177 @@ function ProjectDialog({
           </svg>
         </button>
 
-        {/* Left — carousel + thumbnail strip */}
-        <div className="md:w-[60%] md:shrink-0 md:h-full flex flex-col border-b md:border-b-0 md:border-r border-border">
-          {/* Main image */}
-          <div className="flex-1 relative overflow-hidden bg-bg-card">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={imgIndex}
-                src={project.images[imgIndex]}
-                alt={`${project.title} image ${imgIndex + 1}`}
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.2 }}
-                className="w-full h-full object-contain"
-              />
-            </AnimatePresence>
+        <div className="flex flex-col lg:flex-row h-full min-h-0">
+          {/* Top/Left - carousel + thumbnail strip */}
+          <div className="lg:w-[55%] lg:shrink-0 flex flex-col border-b lg:border-b-0 lg:border-r border-border min-h-0">
+            {/* Main image */}
+            <div className="flex-1 relative overflow-hidden bg-bg-card min-h-[300px] lg:min-h-0">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={imgIndex}
+                  src={project.images[imgIndex]}
+                  alt={`${project.title} image ${imgIndex + 1}`}
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.97 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full h-full object-contain"
+                />
+              </AnimatePresence>
 
-            {/* Prev / Next arrows */}
+              {/* Prev / Next arrows */}
+              {total > 1 && (
+                <>
+                  <button
+                    onClick={() => setImgIndex((i) => (i - 1 + total) % total)}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-bg/80 border border-border text-text-muted hover:text-text hover:bg-bg transition-all duration-200 shadow-sm"
+                  >
+                    <svg viewBox="0 0 16 16" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="10 3 5 8 10 13" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setImgIndex((i) => (i + 1) % total)}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-bg/80 border border-border text-text-muted hover:text-text hover:bg-bg transition-all duration-200 shadow-sm"
+                  >
+                    <svg viewBox="0 0 16 16" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 3 11 8 6 13" />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnail strip */}
             {total > 1 && (
-              <>
-                <button
-                  onClick={() => setImgIndex((i) => (i - 1 + total) % total)}
-                  aria-label="Previous image"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-bg/80 border border-border text-text-muted hover:text-text hover:bg-bg transition-all duration-200 shadow-sm"
-                >
-                  <svg viewBox="0 0 16 16" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="10 3 5 8 10 13" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setImgIndex((i) => (i + 1) % total)}
-                  aria-label="Next image"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-bg/80 border border-border text-text-muted hover:text-text hover:bg-bg transition-all duration-200 shadow-sm"
-                >
-                  <svg viewBox="0 0 16 16" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="6 3 11 8 6 13" />
-                  </svg>
-                </button>
-              </>
+              <div className="shrink-0 flex gap-2 px-4 py-3 overflow-x-auto border-t border-border bg-bg">
+                {project.images.map((src, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setImgIndex(idx)}
+                    aria-label={`View image ${idx + 1}`}
+                    className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                      idx === imgIndex
+                        ? "border-accent opacity-100"
+                        : "border-transparent opacity-50 hover:opacity-80"
+                    }`}
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.title} thumbnail ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
-          {/* Thumbnail strip */}
-          {total > 1 && (
-            <div className="shrink-0 flex gap-2 px-4 py-3 overflow-x-auto border-t border-border bg-bg">
-              {project.images.map((src, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setImgIndex(idx)}
-                  aria-label={`View image ${idx + 1}`}
-                  className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                    idx === imgIndex
-                      ? "border-accent opacity-100"
-                      : "border-transparent opacity-50 hover:opacity-80"
+          {/* Bottom/Right - case study content */}
+          <div 
+            className="flex-1 overflow-y-auto overscroll-contain"
+            style={{ 
+              overflowY: 'scroll',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-y',
+              willChange: 'scroll-position'
+            }}
+            data-lenis-prevent
+            onWheel={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 lg:p-8">
+              {/* Track badge */}
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    project.track === "design" ? "bg-accent" : "bg-emerald-500"
                   }`}
-                >
-                  <img
-                    src={src}
-                    alt={`${project.title} thumbnail ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Right — case study content */}
-        <div className="flex-1 overflow-y-auto px-6 py-8 md:px-10 md:pt-16 md:pb-16">
-          {/* Track badge */}
-          <div className="flex items-center gap-2 mb-4">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                project.track === "design" ? "bg-accent" : "bg-emerald-500"
-              }`}
-            />
-            <span className="text-xs text-text-muted uppercase tracking-wider">
-              {project.track}
-            </span>
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            {project.title}
-          </h2>
-
-          {project.caseStudy ? (
-            <CaseStudyContent caseStudy={project.caseStudy} tags={project.tags} />
-          ) : (
-            <>
-              <p className="text-text-secondary text-lg leading-relaxed mb-8">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2.5 py-1 rounded-md bg-bg-card border border-border text-text-muted"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                />
+                <span className="text-xs text-text-muted uppercase tracking-wider">
+                  {project.track}
+                </span>
               </div>
-            </>
-          )}
+
+              {/* LinkedIn post link for Security Capstone */}
+              {project.title === "Security Capstone" && (
+                <div className="mb-4">
+                  <a
+                    href="https://www.linkedin.com/pulse/exploring-full-cyber-kill-chain-where-red-vs-blue-purple-manandhar-cylwc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-[#0077B5] text-white rounded-lg hover:bg-[#005885] transition-colors duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Read LinkedIn Article
+                  </a>
+                </div>
+              )}
+
+              {/* Aqore mobile platform link */}
+              {project.title === "Aqore" && (
+                <div className="mb-4">
+                  <a
+                    href="https://www.aqore.com/staffing-app-mobile-software/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                    </svg>
+                    View Live Platform
+                  </a>
+                </div>
+              )}
+
+              {/* KAHA app link */}
+              {project.title === "KAHA" && (
+                <div className="mb-4">
+                  <a
+                    href="https://kaha.com.np/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Explore Live App
+                  </a>
+                </div>
+              )}
+
+              <h2 className="text-2xl lg:text-3xl font-bold tracking-tight mb-6">
+                {project.title}
+              </h2>
+
+              {project.caseStudy ? (
+                <CaseStudyContent caseStudy={project.caseStudy} tags={project.tags} />
+              ) : (
+                <>
+                  <p className="text-text-secondary text-lg leading-relaxed mb-8">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2.5 py-1 rounded-md bg-bg-card border border-border text-text-muted"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </motion.div>
     </>
@@ -582,7 +677,7 @@ export default function FeaturedWork() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.05 * i, ease: "easeOut" }}
               onClick={() => setSelected(project)}
-              className="group rounded-xl cursor-pointer bg-bg-card border border-border overflow-hidden hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300 text-left w-full"
+              className="group rounded-xl cursor-pointer bg-bg-card border border-border overflow-hidden hover:border-accent/30 hover:bg-bg-card-hover transition-all duration-300 text-left w-full relative"
             >
               <div className="p-5">
                 <div className="flex items-center gap-2 mb-2">
@@ -596,6 +691,13 @@ export default function FeaturedWork() {
                   <span className="text-xs text-text-muted uppercase tracking-wider">
                     {project.track}
                   </span>
+                </div>
+                
+                {/* Absolutely positioned arrow */}
+                <div className="absolute top-5 right-5 w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-200">
+                  <svg className="w-4 h-4 text-text-muted group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                  </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">
                   {project.title}
